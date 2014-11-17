@@ -1,7 +1,7 @@
 {
-  "name": "Node",
+  "name": "Redict",
   "version": "1.0.0",
-  "description": "Sample of a client for using Kuromoji asynchronously from Node.js through Redis.",
+  "description": "Redis pub/sub mapper",
   "main": "test.js",
   "scripts": {
     "test": "test"
