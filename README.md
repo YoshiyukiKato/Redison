@@ -1,6 +1,10 @@
 #About
 Channel driven Redis subscriber event mapper for node-redis.
 
+#Dependencies
+
+* node-redis
+
 #Setup and Test
 
 ```sh:terminal
@@ -64,3 +68,18 @@ var subMap = {
         }
     }
 }
+```
+
+And invoke ```subSetter``` with using ```subMap``` as an argument.
+
+```js:invoke
+var Redison = require("/path/to/Redison.js"),
+    client = Redison.redisonize();
+    
+client.subSetter(subMap);
+```
+
+It starts a redis subscriber with callbacks you setted.
+
+#LICENSES
+MIT
