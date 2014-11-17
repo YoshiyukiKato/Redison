@@ -1,12 +1,13 @@
-var Redison = require("./Redison.js").init;
-var subClient = new Redison();
-var pubClient = new Redison();
+var Redison = require("./Redison.js");
 
-subClient.subscribe({
+var subClient = Redison.redisonize();
+var pubClient = Redison.redisonize();
+
+subClient.subSetter({
     test:{
         subscribe:function(channel,count){
             console.log("Subscribing " + channel + " :: Now we have " + count + " channels");
-            pubClient.publish("test",{ message: "これは、Redisonのテストです"});
+            pubClient.publish("test", JSON.stringify({ message: "これは、Redisonのテストです"}));
         },
         message:function(channel,message){
             console.log(message);
