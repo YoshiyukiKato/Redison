@@ -81,5 +81,5 @@ client.subSetter(subMap);
 
 It starts a redis subscriber with callbacks you setted.
 
-#LICENSES
+#LICENSE
 MIT
