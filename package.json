@@ -1,0 +1,14 @@
+{
+  "name": "Node",
+  "version": "1.0.0",
+  "description": "Sample of a client for using Kuromoji asynchronously from Node.js through Redis.",
+  "main": "test.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Yoshiyuki Kato",
+  "license": "MIT",
+  "dependencies": {
+    "redis": "^0.12.1"
+  }
+}
