@@ -1,13 +1,13 @@
 var redis = require("redis");
 
-var Redict = function(setting){
+var Redison = function(setting){
     this.client = redis.createClient();
-    this.setting ? setting : { sub:{}, pub:{}};
+    this.setting = setting || { sub:{}, pub:{}};    
 };
 
-Redict.prototype.subscribe = function(subMap){
-    subMap |= this.setting.sub;
-    Object.keys(this.setting.sub).forEach(function(subChannel){
+Redison.prototype.subscribe = function(subMap){
+    subMap = subMap || this.setting.sub;
+    Object.keys(subMap).forEach(function(subChannel){
         if(subChannel){
             if(subMap[subChannel].subscribe){
                 this.client.on("subscribe", subMap[subChannel].subscribe.bind(this));
@@ -32,13 +32,17 @@ Redict.prototype.subscribe = function(subMap){
     }.bind(this));    
 };
 
-Redict.prototype.publish = function(channel, obj){
+Redison.prototype.publish = function(channel, obj){
     var message = JSON.stringify(obj);
-    this.client.publish(this.pubChannel,message);
+    this.client.publish(channel, message);
 };
 
-Redict.prototype.unsubscribe = function(channel){
-    this.unsubscribe("channel");
+Redison.prototype.unsubscribe = function(channel){
+    this.client.unsubscribe(channel);
 }
 
-exports.init = Redict;
+Redison.prototype.punsubscribe = function(pchannel){
+    this.client.unsubscribe(pchannel);
+}
+
+exports.init = Redison;

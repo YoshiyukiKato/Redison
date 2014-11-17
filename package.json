@@ -1,5 +1,5 @@
 {
-  "name": "Redict",
+  "name": "Redison",
   "version": "1.0.0",
   "description": "Redis pub/sub mapper",
   "main": "test.js",
