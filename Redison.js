@@ -6,38 +6,93 @@ var redisonize = function(redisClient){
         subSetter:{
             writable:false,
             value: function(subMap){
+                //複数クライアントがあると、一回のイベントごとに、リスナの数が指数増大するバグ
+                //繰り返しに問題があるかもしれない。
+                //
+                
                 subMap = subMap || this.setting.sub;
-                Object.keys(subMap).forEach(function(subChannel){
+                Object.keys(subMap).forEach(function(subChannel,index){
                     if(subChannel){
                         if(subMap[subChannel].subscribe){
-                            this.on("subscribe", subMap[subChannel].subscribe.bind(this));
+                            this.subSetting.cbList.subscribe[subChannel] = subMap[subChannel].subscribe//.bind(this);
+                            this.on("subscribe", this.cbInterface.subscribe.bind(this));
                         }
                         if(subMap[subChannel].psubscribe){
-                            this.on("psubscribe", subMap[subChannel].psubscribe.bind(this));
+                            this.subSetting.cbList.psubscribe[subChannel] = subMap[subChannel].psubscribe//.bind(this);
+                            this.on("psubscribe", this.cbInterface.psubscribe.bind(this));
                         }
                         if(subMap[subChannel].message){
-                            this.on("message", subMap[subChannel].message.bind(this));
+                            this.subSetting.cbList.message[subChannel] = subMap[subChannel].message//.bind(this);
+                            this.on("message", this.cbInterface.message.bind(this));
                         }
                         if(subMap[subChannel].pmessage){
-                            this.on("pmessage", subMap[subChannel].pmessage.bind(this));
+                            this.subSetting.cbList.pmessage[subChannel] = subMap[subChannel].pmessage//.bind(this);
+                            this.on("pmessage", this.cbInterface.pmessage.bind(this));
                         }
                         if(subMap[subChannel].unsubscribe){
-                            this.on("unsubscribe", subMap[subChannel].unsubscribe.bind(this));
+                            this.subSetting.cbList.unsubscribe[subChannel] = subMap[subChannel].unsubscribe//.bind(this);
+                            this.on("unsubscribe", this.cbInterface.unsubscribe.bind(this));
                         }    
                         if(subMap[subChannel].punsubscribe){
-                            this.on("punsubscribe", subMap[subChannel].punsubscibe.bind(this));
+                            this.subSetting.cbList.punsubscribe[subChannel] = subMap[subChannel].punsubscribe//.bind(this);
+                            this.on("punsubscribe", this.cbInterface.punsubscribe.bind(this));
                         }   
                         this.subscribe(subChannel);
                     }
+                    
                 }.bind(this));  
+            }
+        },
+        cbInterface:{
+            writable:false,
+            value:{
+                subscribe:function(channel,count){
+                    if(this.subSetting.cbList.subscribe[channel]){
+                        this.subSetting.cbList.subscribe[channel](channel,count);
+                    }
+                },
+                psubscribe:function(channel,count){
+                    if(this.subSetting.cbList.psubscribe[channel]){
+                        this.subSetting.cbList.psubscribe[channel](channel,count);
+                    }
+                },
+                message:function(channel,message){
+                    if(this.subSetting.cbList.message[channel]){
+                        this.subSetting.cbList.message[channel](channel,message);
+                    }    
+                },
+                pmessage:function(channel,message){
+                    if(this.subSetting.cbList.pmessage[channel]){
+                        this.subSetting.cbList.pmessage[channel](channel,message);
+                    }
+                },
+                unsubscribe:function(channel,count){
+                    if(this.subSetting.cbList.unsubscribe[channel]){
+                        this.subSetting.cbList.unsubscribe[channel](channel,count);
+                    }
+                },
+                punsubscribe:function(channel,count){
+                    if(this.subSetting.cbList.punsubscribe[channel]){
+                        this.subSetting.cbList.punsubscribe[channel](channel,count);
+                    }
+                }
             }
         },
         subSetting:{
             writable:true,
-            value:{}
+            value:{
+                cbList:{
+                    subscribe:{},
+                    psubscribe:{},
+                    message:{},
+                    pmessage:{},
+                    unsubscribe:{},
+                    punsubscribe:{}
+                }
+            }
         }
     });
     return redison;
 }
-    
+
 exports.redisonize = redisonize;
