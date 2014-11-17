@@ -6,39 +6,30 @@ var pubClient = Redison.redisonize();
 subClient.subSetter({
     test1:{
         subscribe:function(channel,count){
-            //なぜか2回ずつ呼ばれているっぽい
             console.log("Subscribing " + channel + " :: Now we have " + count + " channels");
-            pubClient.publish("test1", "test1::" + JSON.stringify({ message: "これは、Redisonのテストです"}));
+            pubClient.publish("test1", "test1::" + JSON.stringify({ message: "Single channel test."}));
         },
         message:function(channel,message){
             console.log(message);
-            try{
-                //subClient.unsubscribe(channel);
-            }catch(e){
-                console.log(e);   
-            }
+            subClient.unsubscribe(channel);
         },
         unsubscribe:function(channel,count){
             console.log("Unsubscribed " + channel + " :: Now we have " + count + " channels");
-            console.log("***Test was successfully ended. Please stop this process by Ctrl-C.***");
+            console.log("***Single channel test was successfully ended.***");
         }
     },
     test2:{
         subscribe:function(channel,count){
             console.log("Subscribing " + channel + " :: Now we have " + count + " channels");
-            pubClient.publish("test2", "test2::" + JSON.stringify({ message: "これは、Redisonでイベント毎に処理を振り分けるテストです"}));
+            pubClient.publish("test2", "test2::" + JSON.stringify({ message: "Multi channel test."}));
         },
         message:function(channel,message){
             console.log(message);
-            try{
-                //subClient.unsubscribe(channel);
-            }catch(e){
-                console.log(e);   
-            }
+            subClient.unsubscribe(channel);
         },
         unsubscribe:function(channel,count){
             console.log("Unsubscribed " + channel + " :: Now we have " + count + " channels");
-            console.log("***Test was successfully ended. Please stop this process by Ctrl-C.***");
+            console.log("***Multi channel test was successfully ended. Please stop this process by Ctrl-C.***");
         }
     }
 

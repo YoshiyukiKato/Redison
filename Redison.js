@@ -18,22 +18,22 @@ var redisonize = function(redisClient){
                 Object.keys(subMap).forEach(function(subChannel,index){
                     if(subChannel){
                         if(subMap[subChannel].subscribe){
-                            this.subSetting.cbList.subscribe[subChannel] = subMap[subChannel].subscribe//.bind(this); 
+                            this.subSetting.cbList.subscribe[subChannel] = subMap[subChannel].subscribe.bind(this); 
                         }
                         if(subMap[subChannel].psubscribe){
-                            this.subSetting.cbList.psubscribe[subChannel] = subMap[subChannel].psubscribe//.bind(this);    
+                            this.subSetting.cbList.psubscribe[subChannel] = subMap[subChannel].psubscribe.bind(this);    
                         }
                         if(subMap[subChannel].message){
-                            this.subSetting.cbList.message[subChannel] = subMap[subChannel].message//.bind(this);
+                            this.subSetting.cbList.message[subChannel] = subMap[subChannel].message.bind(this);
                         }
                         if(subMap[subChannel].pmessage){
-                            this.subSetting.cbList.pmessage[subChannel] = subMap[subChannel].pmessage//.bind(this);
+                            this.subSetting.cbList.pmessage[subChannel] = subMap[subChannel].pmessage.bind(this);
                         }
                         if(subMap[subChannel].unsubscribe){
-                            this.subSetting.cbList.unsubscribe[subChannel] = subMap[subChannel].unsubscribe//.bind(this);
+                            this.subSetting.cbList.unsubscribe[subChannel] = subMap[subChannel].unsubscribe.bind(this);
                         }    
                         if(subMap[subChannel].punsubscribe){
-                            this.subSetting.cbList.punsubscribe[subChannel] = subMap[subChannel].punsubscribe//.bind(this);
+                            this.subSetting.cbList.punsubscribe[subChannel] = subMap[subChannel].punsubscribe.bind(this);
                         }
                         this.subscribe(subChannel);
                     }
