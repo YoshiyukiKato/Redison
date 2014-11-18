@@ -20,7 +20,7 @@ $ node test.js
 var Redison = require("/path/to/Redison.js"),
     client = Redison.redisonize();
 
-client.subSetter({
+client.setSub({
     subChannel1:{
         subscribe:function(channel,count){
             console.log("Subscribing " + channel + " :: Now we subscribe " + count + " channels");
