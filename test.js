@@ -34,3 +34,9 @@ subClient.setSub({
     }
 
 });
+
+try{
+    subClient.setSub();
+}catch(e){
+    console.log( e +" :: This error is intentionally occured. No problem.");
+}

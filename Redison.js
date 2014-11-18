@@ -19,7 +19,7 @@ var redisonize = function(redisClient){
         setSub:{
             writable:false,
             value: function(subMap){
-                subMap = subMap || this.setting.sub;
+                if(!subMap) throw new Error();
                 Object.keys(subMap).forEach(function(subChannel,index){
                     if(subChannel){
                         if(subMap[subChannel].subscribe){
