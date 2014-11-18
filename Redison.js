@@ -12,7 +12,9 @@ var redisonize = function(redisClient){
                 this.on("pmessage", this.cbInterface.pmessage.bind(this));
                 this.on("unsubscribe", this.cbInterface.unsubscribe.bind(this));
                 this.on("punsubscribe", this.cbInterface.punsubscribe.bind(this));
+                return this;
             }
+            
         },
         setSub:{
             writable:false,
