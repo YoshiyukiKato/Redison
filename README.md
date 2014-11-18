@@ -46,6 +46,7 @@ You can set callbacks of redis subscriber events for every channel by hashmap.
 var subMap = {
     //channels name
     subChannel1:{
+        //event:callback
         subscribe:function(channel,count){
             console.log("Subscribing " + channel + " :: Now we subscribe " + count + " channels");
         },
