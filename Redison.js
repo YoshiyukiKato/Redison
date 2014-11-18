@@ -3,17 +3,20 @@ var redis = require("redis");
 var redisonize = function(redisClient){
     redisClient = redisClient || redis.createClient();
     var redison = Object.create(redisClient, {
-        subSetter:{
+        initSub:{
             writable:false,
-            value: function(subMap){
-                
+            value:function(){
                 this.on("subscribe", this.cbInterface.subscribe.bind(this));
                 this.on("psubscribe", this.cbInterface.psubscribe.bind(this));
                 this.on("message", this.cbInterface.message.bind(this));
                 this.on("pmessage", this.cbInterface.pmessage.bind(this));
                 this.on("unsubscribe", this.cbInterface.unsubscribe.bind(this));
                 this.on("punsubscribe", this.cbInterface.punsubscribe.bind(this));
-                
+            }
+        },
+        setSub:{
+            writable:false,
+            value: function(subMap){
                 subMap = subMap || this.setting.sub;
                 Object.keys(subMap).forEach(function(subChannel,index){
                     if(subChannel){
@@ -49,9 +52,9 @@ var redisonize = function(redisClient){
                         this.subSetting.cbList.subscribe[channel](channel,count);
                     }
                 },
-                psubscribe:function(channel,count){
+                psubscribe:function(pattern,channel,count){
                     if(this.subSetting.cbList.psubscribe[channel]){
-                        this.subSetting.cbList.psubscribe[channel](channel,count);
+                        this.subSetting.cbList.psubscribe[channel](pattern,channel,count);
                     }
                 },
                 message:function(channel,message){
@@ -59,9 +62,9 @@ var redisonize = function(redisClient){
                         this.subSetting.cbList.message[channel](channel,message);
                     }    
                 },
-                pmessage:function(channel,message){
+                pmessage:function(pattern,channel,message){
                     if(this.subSetting.cbList.pmessage[channel]){
-                        this.subSetting.cbList.pmessage[channel](channel,message);
+                        this.subSetting.cbList.pmessage[channel](pattern,channel,message);
                     }
                 },
                 unsubscribe:function(channel,count){
@@ -69,9 +72,9 @@ var redisonize = function(redisClient){
                         this.subSetting.cbList.unsubscribe[channel](channel,count);
                     }
                 },
-                punsubscribe:function(channel,count){
+                punsubscribe:function(pattern,channel,count){
                     if(this.subSetting.cbList.punsubscribe[channel]){
-                        this.subSetting.cbList.punsubscribe[channel](channel,count);
+                        this.subSetting.cbList.punsubscribe[channel](pattern,channel,count);
                     }
                 }
             }

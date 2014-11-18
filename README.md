@@ -36,7 +36,7 @@ client.subSetter({
 Redison extends [node_redis](https://github.com/mranney/node_redis) without overriding any method. So, you can use Redison client same as node-redis client.  
   
 If you already extend node-redis by yourself, Redison can be used as decorator by ```Redison.redisonize(yourRedisClient)```.
-But, please be careful to use this command as decorator, because Redison may override yourown method or yourown method does not allow Redison to override the method when you use ```subSetter```, ```subSetting```, and ```cbInterface```.
+But, please be careful to use this command as decorator, because Redison may override yourown method or yourown method does not allow Redison to override the method when you use ```initSub```,```setSub```, ```subSetting```, and ```cbInterface```.
 
 ##Channel-driven Event Map
 
@@ -71,13 +71,13 @@ var subMap = {
 }
 ```
 
-And invoke ```subSetter``` with using ```subMap``` as an argument.
+And invoke ```setSub``` with using ```subMap``` as an argument.
 
 ```js:invoke
 var Redison = require("/path/to/Redison.js"),
-    client = Redison.redisonize();
+    client = Redison.redisonize().initSub();
     
-client.subSetter(subMap);
+client.setSub(subMap);
 ```
 
 It starts a redis subscriber with callbacks you setted.
