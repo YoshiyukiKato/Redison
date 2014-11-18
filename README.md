@@ -33,7 +33,7 @@ client.subSetter({
 
 ```
 
-Redison extends node-redis without overriding any method. So, you can use Redison client same as node-redis client.  
+Redison extends [node_redis](https://github.com/mranney/node_redis) without overriding any method. So, you can use Redison client same as node-redis client.  
   
 If you already extend node-redis by yourself, Redison can be used as decorator by ```Redison.redisonize(yourRedisClient)```.
 But, please be careful to use this command as decorator, because Redison may override yourown method or yourown method does not allow Redison to override the method when you use ```subSetter```, ```subSetting```, and ```cbInterface```.
