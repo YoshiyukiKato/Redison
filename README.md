@@ -3,7 +3,7 @@ Channel driven Redis subscriber event mapper for node-redis.
 
 #Dependencies
 
-* node-redis
+* redis
 
 #Setup and Test
 
