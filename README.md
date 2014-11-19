@@ -38,10 +38,17 @@ client.setSub({
 
 Redison extends [node_redis](https://github.com/mranney/node_redis) without overriding any method. So, you can use Redison client same as node-redis client.  
   
-##Channel-driven Event Map
+##Event Map
 
 You can set callbacks of redis subscriber events for every channel by hashmap.
+First, please call ```initListener``` for initialize client as subscriber.
 
+```js:invoke
+var Redison = require("/path/to/Redison.js"),
+    client = Redison.redisonize().initSub();
+```
+
+###Common subscriber
 ```js:map
 var subMap = {
     //channels name
@@ -71,16 +78,53 @@ var subMap = {
 }
 ```
 
-Call ```initSub``` for initialize client as subscriber. And then, ```setSub``` with using ```subMap``` as an argument.
+ And then, ```setSub``` with using ```subMap``` as an argument.
 
 ```js:invoke
-var Redison = require("/path/to/Redison.js"),
-    client = Redison.redisonize().initSub();
     
 client.setSub(subMap);
 ```
 
 It starts a redis subscriber with callbacks you setted.
+
+###Pattern subscriber
+```js:map
+var psubMap = {
+    //channels name
+    "pattern*":{
+        //event:callback
+        subscribe:function(channel,count){
+            console.log("Subscribing " + channel + " :: Now we subscribe " + count + " channels");
+        },
+        message:function(pattern,channel,message){
+            console.log(pattern + " :: " + channel + " :: " +message);
+        },
+        unsubscribe:function(channel,count){
+            console.log("Unsubscribing " + channel + " :: Now we subscribe " + count + " channels");
+        }
+    },
+    "pat*ern":{
+        subscribe:function(channel,count){
+            console.log("callback");
+        },
+        message:function(pattern,channel,message){
+            console.log("I got a message from" + channel + "caught by" + pattern + ":: " + message);
+        },
+        unsubscribe:function(channel, count){
+            console.log("See you " + channel);
+        }
+    }
+}
+```
+
+And then, ```setPsub``` with using ```psubMap``` as an argument.
+
+```js:invoke
+    
+client.setPsub(psubMap);
+```
+
+It starts a redis pattern subscriber with callbacks you setted.
 
 ##LICENSE
 MIT
