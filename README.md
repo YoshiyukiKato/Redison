@@ -9,13 +9,8 @@ Redis subscriber event mapper for node-redis.
 
 ##Clone from Git
 ```sh:terminal
-$ npm install
-$ node test.js
-```
-
-##Get from npm
-```sh:terminal
-$ npm install
+$ git clone git@github.com:YoshiyukiKato/Redison.git
+$ cd Redison && npm install
 $ node test.js
 ```
 
