@@ -7,12 +7,14 @@ Redis subscriber event mapper for node-redis.
 
 #Setup and Test
 
-##Clone from Git
+##Clone from Github
 ```sh:terminal
 $ git clone git@github.com:YoshiyukiKato/Redison.git
 $ cd Redison && npm install
 $ node test.js
 ```
+
+
 
 #Usage
 
@@ -35,8 +37,9 @@ client.setSub({
 
 ```
 
-Redison extends [node_redis](https://github.com/mranney/node_redis) without overriding any method. So, you can use Redison client same as node_redis client.  
-  
+Redison extends [node_redis](https://github.com/mranney/node_redis) without overriding any method.  
+So, you can use Redison client same as node_redis client.
+   
 ##Event Map
 
 You can set callbacks of redis subscriber events for every channel by hashmap.
@@ -80,7 +83,6 @@ var subMap = {
  And then, invoke ```setSub``` with using ```subMap``` as an argument.
 
 ```js:invoke
-    
 client.setSub(subMap);
 ```
 
@@ -89,7 +91,7 @@ It starts a redis subscriber with callbacks you setted.
 ###Pattern subscriber
 ```js:map
 var psubMap = {
-    //channels name
+    //channels pattern
     "pattern*":{
         //event:callback
         subscribe:function(channel,count){
@@ -119,7 +121,6 @@ var psubMap = {
 And then, invoke ```setPsub``` with using ```psubMap``` as an argument.
 
 ```js:invoke
-    
 client.setPsub(psubMap);
 ```
 

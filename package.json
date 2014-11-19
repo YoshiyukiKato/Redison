@@ -1,8 +1,8 @@
 {
-  "name": "Redison",
+  "name": "redison",
   "version": "0.0.1",
-  "description": "Redis pub/sub mapper",
-  "main": "Redison.js",
+  "description": "Redis subscribe event mapper",
+  "main": "index.js",
   "scripts": {
     "test": "test"
   },
