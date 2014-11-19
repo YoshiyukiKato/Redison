@@ -21,7 +21,7 @@ $ node test.js
 
 ```js:usage
 var Redison = require("/path/to/Redison"),
-    client = Redison.redisonize();
+    client = Redison.redisonize().initListener();
 
 client.setSub({
     subChannel1:{
@@ -36,7 +36,7 @@ client.setSub({
 
 ```
 
-Redison extends [node_redis](https://github.com/mranney/node_redis) without overriding any method. So, you can use Redison client same as node-redis client.  
+Redison extends [node_redis](https://github.com/mranney/node_redis) without overriding any method. So, you can use Redison client same as node_redis client.  
   
 ##Event Map
 
@@ -45,7 +45,7 @@ First, please call ```initListener``` for initialize client as subscriber.
 
 ```js:invoke
 var Redison = require("/path/to/Redison.js"),
-    client = Redison.redisonize().initSub();
+    client = Redison.redisonize().initListener();
 ```
 
 ###Common subscriber
