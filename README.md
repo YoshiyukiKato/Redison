@@ -25,7 +25,7 @@ $ node node_modules/redison/test.js
 ##Overview
 
 ```js:usage
-var Redison = require("/path/to/Redison"),
+var Redison = require("redison"),
     client = Redison.redisonize().initListener();
 
 client.setSub({
