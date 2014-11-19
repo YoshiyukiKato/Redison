@@ -8,6 +8,9 @@ Redis subscriber event mapper for node-redis.
 #Setup and Test
 
 ```sh:terminal
+$ pwd 
+/path/to/Redison
+
 $ npm install
 $ node test.js
 ```
@@ -17,7 +20,7 @@ $ node test.js
 ##Overview
 
 ```js:usage
-var Redison = require("/path/to/Redison.js"),
+var Redison = require("/path/to/Redison"),
     client = Redison.redisonize();
 
 client.setSub({
@@ -35,9 +38,6 @@ client.setSub({
 
 Redison extends [node_redis](https://github.com/mranney/node_redis) without overriding any method. So, you can use Redison client same as node-redis client.  
   
-If you already extend node-redis by yourself, Redison can be used as decorator by ```Redison.redisonize(yourRedisClient)```.
-But, please be careful to use this command as decorator, because Redison may override yourown method or yourown method does not allow Redison to override the method when you use ```initSub```,```setSub```, ```subSetting```, and ```cbInterface```.
-
 ##Channel-driven Event Map
 
 You can set callbacks of redis subscriber events for every channel by hashmap.
@@ -71,7 +71,7 @@ var subMap = {
 }
 ```
 
-And invoke ```setSub``` with using ```subMap``` as an argument.
+Call ```initSub``` for initialize client as subscriber. And then, ```setSub``` with using ```subMap``` as an argument.
 
 ```js:invoke
 var Redison = require("/path/to/Redison.js"),
