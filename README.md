@@ -1,5 +1,5 @@
 #About
-Channel driven Redis subscriber event mapper for node-redis.
+Redis subscriber event mapper for node-redis.
 
 #Dependencies
 

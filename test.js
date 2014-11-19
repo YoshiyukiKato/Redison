@@ -1,4 +1,4 @@
-var Redison = require("./Redison.js");
+var Redison = require("./lib/Redison");
 
 var subClient = Redison.redisonize().initSub();
 var pubClient = Redison.redisonize();
