@@ -14,7 +14,11 @@ $ cd Redison && npm install
 $ node test.js
 ```
 
-
+##Get from npm
+```sh:terminal
+$ npm install redison
+$ node node_modules/redison/test.js
+```
 
 #Usage
 
