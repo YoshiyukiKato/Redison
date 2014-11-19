@@ -7,10 +7,14 @@ Redis subscriber event mapper for node-redis.
 
 #Setup and Test
 
+##Clone from Git
 ```sh:terminal
-$ pwd 
-/path/to/Redison
+$ npm install
+$ node test.js
+```
 
+##Get from npm
+```sh:terminal
 $ npm install
 $ node test.js
 ```
@@ -78,7 +82,7 @@ var subMap = {
 }
 ```
 
- And then, ```setSub``` with using ```subMap``` as an argument.
+ And then, invoke ```setSub``` with using ```subMap``` as an argument.
 
 ```js:invoke
     
@@ -117,7 +121,7 @@ var psubMap = {
 }
 ```
 
-And then, ```setPsub``` with using ```psubMap``` as an argument.
+And then, invoke ```setPsub``` with using ```psubMap``` as an argument.
 
 ```js:invoke
     
