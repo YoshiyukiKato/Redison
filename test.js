@@ -1,6 +1,6 @@
 var Redison = require("./lib/Redison");
 
-var subClient = Redison.redisonize().initSub();
+var subClient = Redison.redisonize().initListener();
 var pubClient = Redison.redisonize();
 
 subClient.setSub({
@@ -10,13 +10,14 @@ subClient.setSub({
             pubClient.publish("test1", "test1::" + JSON.stringify({ message: "Single channel test."}));
         },
         message:function(channel,message){
-            console.log(message);
+            console.log("Message from " + channel + " : "  + message);
             subClient.unsubscribe(channel);
         },
         unsubscribe:function(channel,count){
             console.log("Unsubscribed " + channel + " :: Now we have " + count + " channels");
             console.log("***Single channel test was successfully ended.***");
-        }
+        },
+
     },
     test2:{
         subscribe:function(channel,count){
@@ -24,16 +25,47 @@ subClient.setSub({
             pubClient.publish("test2", "test2::" + JSON.stringify({ message: "Multi channel test."}));
         },
         message:function(channel,message){
-            console.log(message);
+            console.log("Message from " + channel + " : "  + message);
             subClient.unsubscribe(channel);
         },
         unsubscribe:function(channel,count){
             console.log("Unsubscribed " + channel + " :: Now we have " + count + " channels");
-            console.log("***Multi channel test was successfully ended. Please stop this process by Ctrl-C.***");
+            console.log("***Multi channel test was successfully ended.***");
         }
     }
-
 });
+
+subClient.setPsub({
+	"ptest*":{
+		psubscribe:function(pattern,count){
+			console.log("Subscribing pattern " + pattern + " :: Now we have " + count + " channels");	
+			pubClient.publish("ptest1",  JSON.stringify({ message: "Single channel test with pattern."}));
+		},
+		pmessage:function(pattern, channel, message){
+			console.log("Message from " + channel + " cought by " + pattern + " : "  + message);
+		    subClient.punsubscribe(pattern);
+		},
+		punsubscribe:function(pattern,count){
+			console.log("Unsubscribed pattern " + pattern + " :: Now we have " + count + " channels");
+			console.log("***Single channel test with pattern was successfully ended.***");
+		}
+	},
+	"ptes*est":{
+		psubscribe:function(pattern,count){
+			console.log("Subscribing pattern " + pattern + " :: Now we have " + count + " channels");
+			pubClient.publish("ptestptest",  JSON.stringify({ message: "Multi channel test with pattern."}));	
+		},
+		pmessage:function(pattern, channel, message){
+			console.log("Message from " + channel + " cought by " + pattern + " : "  + message);
+			subClient.punsubscribe(pattern);
+		},
+		punsubscribe:function(pattern,count){
+			console.log("Unsubscribed pattern " + pattern + " :: Now we have " + count + " channels");
+			console.log("***Multi channel test with pattern was successfully ended. Please stop this process by Ctrl-C.***");
+		}
+	}
+});
+
 
 try{
     subClient.setSub();
