@@ -130,5 +130,10 @@ client.setPsub(psubMap);
 
 It starts a redis pattern subscriber with callbacks you setted.
 
+##Unsubscribe with State
+
+* client.stateUnsub(channel,unsubState)
+* client.statePunsub(pattern,punsubState)
+
 ##LICENSE
 MIT
