@@ -143,13 +143,21 @@ Thus, the quit state provides two kinds of unsubscribe: **quit** or **pause**.
 client.stateUnsub(channel,quitState);
 ```
 
-###Unsubscribe as Quit
+###Unsubscribe/Punsubscribe as Quit
 
 ```js
 client.stateUnsub(channel,true);
 ```
 
-###Unsubscribe as Pause
+```js
+client.statePunsub(channel,true);
+```
+
+###Unsubscribe/Punsubscribe as Pause
+
+```js
+client.stateUnsub(channel,false);
+```
 
 ```js
 client.statePunsub(pattern,false);
