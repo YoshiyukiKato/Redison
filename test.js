@@ -12,6 +12,8 @@ subClient.setSub({
         message:function(channel,message){
             console.log("Message from " + channel + " : "  + message);
             subClient.stateUnsub(channel,false);
+            console.log("unsub this channel with pause state");
+            console.log(subClient.hasCallback(channel));
         },
         unsubscribe:function(channel,count){
             console.log("Unsubscribed " + channel + " :: Now we have " + count + " channels");
@@ -27,6 +29,8 @@ subClient.setSub({
         message:function(channel,message){
             console.log("Message from " + channel + " : "  + message);
             subClient.stateUnsub(channel,true);
+            console.log("unsub this channel with quit state");
+            console.log(subClient.hasCallback(channel));
         },
         unsubscribe:function(channel,count){
             console.log("Unsubscribed " + channel + " :: Now we have " + count + " channels");
@@ -44,6 +48,8 @@ subClient.setPsub({
 		pmessage:function(pattern, channel, message){
 			console.log("Message from " + channel + " cought by " + pattern + " : "  + message);
 		    subClient.statePunsub(pattern,true);
+            console.log("unsub this channel with quit state");
+            console.log(subClient.hasPcallback(pattern));
 		},
 		punsubscribe:function(pattern,count){
 			console.log("Unsubscribed pattern " + pattern + " :: Now we have " + count + " channels");
@@ -58,6 +64,8 @@ subClient.setPsub({
 		pmessage:function(pattern, channel, message){
 			console.log("Message from " + channel + " cought by " + pattern + " : "  + message);
 			subClient.statePunsub(pattern,false);
+            console.log("unsub this channel with pause state");
+            console.log(subClient.hasPcallback(pattern));
 		},
 		punsubscribe:function(pattern,count){
 			console.log("Unsubscribed pattern " + pattern + " :: Now we have " + count + " channels");
