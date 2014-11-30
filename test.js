@@ -11,7 +11,7 @@ subClient.setSub({
         },
         message:function(channel,message){
             console.log("Message from " + channel + " : "  + message);
-            subClient.unsubscribe(channel);
+            subClient.stateUnsub(channel,false);
         },
         unsubscribe:function(channel,count){
             console.log("Unsubscribed " + channel + " :: Now we have " + count + " channels");
@@ -26,7 +26,7 @@ subClient.setSub({
         },
         message:function(channel,message){
             console.log("Message from " + channel + " : "  + message);
-            subClient.unsubscribe(channel);
+            subClient.stateUnsub(channel,true);
         },
         unsubscribe:function(channel,count){
             console.log("Unsubscribed " + channel + " :: Now we have " + count + " channels");
@@ -43,7 +43,7 @@ subClient.setPsub({
 		},
 		pmessage:function(pattern, channel, message){
 			console.log("Message from " + channel + " cought by " + pattern + " : "  + message);
-		    subClient.punsubscribe(pattern);
+		    subClient.statePunsub(pattern,true);
 		},
 		punsubscribe:function(pattern,count){
 			console.log("Unsubscribed pattern " + pattern + " :: Now we have " + count + " channels");
@@ -57,7 +57,7 @@ subClient.setPsub({
 		},
 		pmessage:function(pattern, channel, message){
 			console.log("Message from " + channel + " cought by " + pattern + " : "  + message);
-			subClient.punsubscribe(pattern);
+			subClient.statePunsub(pattern,false);
 		},
 		punsubscribe:function(pattern,count){
 			console.log("Unsubscribed pattern " + pattern + " :: Now we have " + count + " channels");
