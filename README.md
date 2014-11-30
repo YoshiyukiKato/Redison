@@ -137,7 +137,7 @@ var psubMap = {
 ##Unsubscribe with State
 Unsubscribing a specific channel/pattern with a state.
 The state allows you to choose whether delete callback setted by Event Map or not.
-```stateUnsub``` method provides two kinds of unsubscription: **quit** or **pause**.
+```stateUnsub``` method provides two kinds of unsubscription: **quit** and **pause**.
 The **quit** deletes callback, the **pause** do not.
 
 ```js
