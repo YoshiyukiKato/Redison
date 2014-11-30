@@ -44,9 +44,9 @@ client.setSub({
 Redison extends [node_redis](https://github.com/mranney/node_redis) without overriding any method.  
 So, you can use Redison client same as node_redis client.
    
-##Event Map
+##Subscribe with Event Map
 
-You can set callbacks of redis subscriber events for every channel by hashmap.
+You can set callbacks of redis subscriber events for every channel/pattern by hashmap.
 First, please call ```initListener``` for initialize client as subscriber.
 
 ```js:invoke
@@ -55,6 +55,15 @@ var Redison = require("/path/to/Redison.js"),
 ```
 
 ###Common subscriber
+
+Starting a redis subscriber with callbacks you setted in ```subMap```.
+
+```js:invoke
+client.setSub(subMap);
+```
+
+The ```subMap``` is written as follows:
+
 ```js:map
 var subMap = {
     //channels name
@@ -84,15 +93,18 @@ var subMap = {
 }
 ```
 
- And then, invoke ```setSub``` with using ```subMap``` as an argument.
 
-```js:invoke
-client.setSub(subMap);
-```
-
-It starts a redis subscriber with callbacks you setted.
 
 ###Pattern subscriber
+
+Starting a redis pattern subscriber with callbacks you setted in ```psubMap```.
+
+```js:invoke
+client.setPsub(psubMap);
+```
+
+The ```psubMap``` is written as follows:
+
 ```js:map
 var psubMap = {
     //channels pattern
@@ -122,18 +134,26 @@ var psubMap = {
 }
 ```
 
-And then, invoke ```setPsub``` with using ```psubMap``` as an argument.
+##Unsubscribe with State
+Unsubscribing a specific channel/pattern with a quit state.
+The quit state allows you to choose whether delete callback setted by Event Map or not.
+Thus, the quit state provides two kinds of unsubscribe: **quit** or **pause**.
 
-```js:invoke
-client.setPsub(psubMap);
+```js
+client.stateUnsub(channel,quitState);
 ```
 
-It starts a redis pattern subscriber with callbacks you setted.
+###Unsubscribe as Quit
 
-##Unsubscribe with State
+```js
+client.stateUnsub(channel,true);
+```
 
-* client.stateUnsub(channel,unsubState)
-* client.statePunsub(pattern,punsubState)
+###Unsubscribe as Pause
+
+```js
+client.statePunsub(pattern,false);
+```
 
 ##LICENSE
 MIT
