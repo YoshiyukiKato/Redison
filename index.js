@@ -1,3 +1,3 @@
-var Redison = reqire("./lib/Redison");
+var Redison = reqire("./lib/redison");
 
 module.exports = Redison;
