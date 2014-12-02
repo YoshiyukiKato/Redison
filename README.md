@@ -1,5 +1,5 @@
 #About
-Redis subscriber event mapper for node-redis.
+Redis subscribe event mapper for node_redis.
 
 #Dependencies
 
@@ -23,6 +23,7 @@ $ node node_modules/redison/test.js
 #Usage
 
 ##Overview
+Redison provides simple method for setting callbacks for events of Redis subscriber by hashmap.
 
 ```js:usage
 var Redison = require("redison"),
@@ -40,18 +41,32 @@ client.setSub({
 });
 
 ```
-
 Redison extends [node_redis](https://github.com/mranney/node_redis) without overriding any method.  
-So, you can use Redison client same as node_redis client.
-   
+You can use Redison client same as node_redis client.
+  
+In case of setting detail prameter of redis connection in node_redis client, you can decorate the node_redis client by ```redisonize``` method.
+
+```js:decorate
+var node_redis = require("redis"),
+    nrClient = redis.createClient(port, host, options);
+    
+var redisonClient = require("redison").redisonize(nrClient);
+```
+
 ##Subscribe with Event Map
 
-You can set callbacks of redis subscriber events for every channel/pattern by hashmap.
+Setting callbacks of redis subscriber events for every channel/pattern by hashmap.
 First, please call ```initListener``` for initialize client as subscriber.
 
 ```js:invoke
 var Redison = require("/path/to/Redison.js"),
     client = Redison.redisonize().initListener();
+```
+This activates event listeners of all redis subscriber events: ```subscribe```, ```message```, ```unsubscribe```, ```psubscribe```, ```pmessage```, ```punsubscribe```.  
+If you want to listen specific event, please call ```initListener``` with desired event names as arguments.
+
+```js:invoke
+client = redison.redisonize().initListener("subscribe","message");
 ```
 
 ###Common subscriber
