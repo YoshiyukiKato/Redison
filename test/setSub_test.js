@@ -1,4 +1,4 @@
-var Redison = require("./lib/Redison");
+var Redison = require("./lib/redison");
 
 var subClient = Redison.redisonize().initListener();
 var pubClient = Redison.redisonize();

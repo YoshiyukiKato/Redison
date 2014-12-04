@@ -1,5 +1,5 @@
 #About
-Redis subscribe event mapper for node_redis.
+Redis subscribe event mapper
 
 #Dependencies
 
@@ -59,7 +59,7 @@ Setting callbacks of redis subscriber events for every channel/pattern by hashma
 First, please call ```initListener``` for initialize client as subscriber.
 
 ```js:invoke
-var Redison = require("/path/to/Redison.js"),
+var Redison = require("redison"),
     client = Redison.redisonize().initListener();
 ```
 This activates event listeners of all redis subscriber events: ```subscribe```, ```message```, ```unsubscribe```, ```psubscribe```, ```pmessage```, ```punsubscribe```.  
