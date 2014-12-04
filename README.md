@@ -27,7 +27,7 @@ Redison provides simple method for setting callbacks for events of Redis subscri
 
 ```js:usage
 var Redison = require("redison"),
-    client = Redison.redisonize().initListener();
+    client = Redison.redisonize().startListener();
 
 client.setSub({
     subChannel1:{
@@ -56,17 +56,17 @@ var redisonClient = require("redison").redisonize(nrClient);
 ##Subscribe with Event Map
 
 Setting callbacks of redis subscriber events for every channel/pattern by hashmap.
-First, please call ```initListener``` for initialize client as subscriber.
+First, please call ```startListener``` for initialize client as subscriber.
 
 ```js:invoke
 var Redison = require("redison"),
-    client = Redison.redisonize().initListener();
+    client = Redison.redisonize().startListener();
 ```
 This activates event listeners of all redis subscriber events: ```subscribe```, ```message```, ```unsubscribe```, ```psubscribe```, ```pmessage```, ```punsubscribe```.  
-If you want to listen specific event, please call ```initListener``` with desired event names as arguments.
+If you want to listen specific event, please call ```startListener``` with desired event names as arguments.
 
 ```js:invoke
-client = redison.redisonize().initListener("subscribe","message");
+client = redison.redisonize().startListener("subscribe","message");
 ```
 
 ###Common subscriber
