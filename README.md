@@ -51,20 +51,33 @@ var node_redis = require("redis"),
 var redisonClient = require("redison").redisonize(nrClient);
 ```
 
+
 ##Subscribe with Event Map
 
 Setting callbacks of redis subscriber events for every channel/pattern by hashmap.
-First, please call ```startListener``` for initialize client as subscriber.
+First, please call ```startListener``` for listening to redis subscriber events.
 
 ```js:invoke
 var Redison = require("redison"),
     client = Redison.redisonize().startListener();
 ```
 This activates event listeners of all redis subscriber events: ```subscribe```, ```message```, ```unsubscribe```, ```psubscribe```, ```pmessage```, ```punsubscribe```.  
-If you want to listen specific event, please call ```startListener``` with desired event names as arguments.
+If you want to listen to specific event, please call ```startListener``` with desired event names as arguments.
 
 ```js:invoke
 client = redison.redisonize().startListener("subscribe","message");
+```
+
+When you want to stop listening of redis subscribe event, you can remove event listeners by ```stopListener``` method.
+
+```js:invoke
+client.stopListener();
+```
+This removes event listeners of all redis subscriber events: ```subscribe```, ```message```, ```unsubscribe```, ```psubscribe```, ```pmessage```, ```punsubscribe```.  
+If you want to stop listening to specific event, please call ```stopListener``` with desired event names as arguments.
+
+```js:invoke
+client = redison.stopListener("subscribe","message");
 ```
 
 ###Common subscriber
