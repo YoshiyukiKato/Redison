@@ -53,7 +53,7 @@ var redisonClient = require("redison").redisonize(nrClient);
 
 
 ##Subscribe with Event Map
-
+###Start/Stop listener
 Setting callbacks of redis subscriber events for every channel/pattern by hashmap.
 First, please call ```startListener``` for listening to redis subscriber events.
 
@@ -82,7 +82,7 @@ client = redison.stopListener("subscribe","message");
 
 ###Common subscriber
 
-Starting a redis subscriber with callbacks you setted in ```subMap```.
+Setting up common redis subscriber with callbacks defined in ```subMap```.
 
 ```js:invoke
 client.setSub(subMap);
@@ -123,7 +123,7 @@ var subMap = {
 
 ###Pattern subscriber
 
-Starting a redis pattern subscriber with callbacks you setted in ```psubMap```.
+Setting up redis pattern subscriber with callbacks defined in ```psubMap```.
 
 ```js:invoke
 client.setPsub(psubMap);

@@ -1,6 +1,6 @@
 var Redison = require("./lib/redison");
 
-var subClient = Redison.redisonize().initListener();
+var subClient = Redison.redisonize().startListener();
 var pubClient = Redison.redisonize();
 
 subClient.setSub({

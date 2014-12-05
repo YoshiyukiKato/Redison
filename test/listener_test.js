@@ -2,7 +2,7 @@
 //and stopListener with arguments
 
 var Redison = require("../lib/redison");
-var subClient = Redison.redisonize().initListener("subscribe","message");
+var subClient = Redison.redisonize().startListener("subscribe","message");
 
 console.log(subClient.listeners("subscribe"));
 console.log(subClient.listeners("message"));
