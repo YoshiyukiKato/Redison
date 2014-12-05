@@ -53,32 +53,35 @@ var redisonClient = require("redison").redisonize(nrClient);
 
 
 ##Subscribe with Event Map
-###Start/Stop listener
 Setting callbacks of redis subscriber events for every channel/pattern by hashmap.
-First, please call ```startListener``` for listening to redis subscriber events.
+###Start/Stop listener
 
 ```js:invoke
 var Redison = require("redison"),
-    client = Redison.redisonize().startListener();
+    client = Redison.redisonize();
 ```
-This activates event listeners of all redis subscriber events: ```subscribe```, ```message```, ```unsubscribe```, ```psubscribe```, ```pmessage```, ```punsubscribe```.  
-If you want to listen to specific event, please call ```startListener``` with desired event names as arguments.
+
+* startListener([eventNames])
+
+This activates listeners of redis subscriber events specified in ```[eventNames]```.
 
 ```js:invoke
-client = redison.redisonize().startListener("subscribe","message");
+client.startListener("subscribe","message");
 ```
 
-When you want to stop listening of redis subscribe event, you can remove event listeners by ```stopListener``` method.
+In case of invokation with no arguments, ```startListener``` activates event listeners of all redis subscriber events: ```subscribe```, ```message```, ```unsubscribe```, ```psubscribe```, ```pmessage```, ```punsubscribe```.  
+
+
+* stoplistener([eventNames])
+
+This removes listeners of redis subscriber events specified in ```[eventNames]```.
 
 ```js:invoke
-client.stopListener();
+client.stopListener("subscribe","message");
 ```
-This removes event listeners of all redis subscriber events: ```subscribe```, ```message```, ```unsubscribe```, ```psubscribe```, ```pmessage```, ```punsubscribe```.  
-If you want to stop listening to specific event, please call ```stopListener``` with desired event names as arguments.
 
-```js:invoke
-client = redison.stopListener("subscribe","message");
-```
+In case of invokation with no arguments, ```stopListener``` removes event listeners of all redis subscriber events: ```subscribe```, ```message```, ```unsubscribe```, ```psubscribe```, ```pmessage```, ```punsubscribe```.  
+
 
 ###Common subscriber
 
