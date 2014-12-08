@@ -23,7 +23,7 @@ $ npm install redison
 ##Overview
 Redison provides simple method for setting callbacks for events of Redis subscriber by hashmap.
 
-```js:usage
+```js
 var Redison = require("redison"),
     client = Redison.redisonize().startListener();
 
@@ -39,14 +39,13 @@ client.setSub({
 });
 
 ```
-Redison extends [node_redis](https://github.com/mranney/node_redis) without overriding any method.  
-You can use Redison client same as node_redis client.
+Redison extends [node_redis](https://github.com/mranney/node_redis) without overriding any method. You can use Redison client same as node_redis client.
   
 In case of setting detail prameter of redis connection in node_redis client, you can decorate the node_redis client by ```redisonize``` method.
 
-```js:decorate
+```js
 var node_redis = require("redis"),
-    nrClient = redis.createClient(port, host, options);
+    nrClient = node_redis.createClient(port, host, options);
     
 var redisonClient = require("redison").redisonize(nrClient);
 ```
@@ -56,7 +55,7 @@ var redisonClient = require("redison").redisonize(nrClient);
 Setting callbacks of redis subscriber events for every channel/pattern by hashmap.
 
 ### Precondition
-```js:invoke
+```js
 var Redison = require("redison"),
     client = Redison.redisonize();
 ```
@@ -67,7 +66,7 @@ var Redison = require("redison"),
 
 This activates listeners of redis subscriber events specified in ```[eventNames]```.
 
-```js:invoke
+```js
 client.startListener("subscribe","message");
 ```
 
@@ -78,7 +77,7 @@ In case of invokation with no arguments, ```startListener``` activates event lis
 
 This removes listeners of redis subscriber events specified in ```[eventNames]```.
 
-```js:invoke
+```js
 client.stopListener("subscribe","message");
 ```
 
@@ -96,7 +95,7 @@ client.setSub(subMap);
 
 The ```subMap``` is written as follows:
 
-```js:map
+```js
 var subMap = {
     //channels name
     subChannel1:{
@@ -131,13 +130,13 @@ var subMap = {
 ####setPsub(psubMap)
 Setting up redis pattern subscriber with callbacks defined in ```psubMap```.
 
-```js:invoke
+```js
 client.setPsub(psubMap);
 ```
 
 The ```psubMap``` is written as follows:
 
-```js:map
+```js
 var psubMap = {
     //channels pattern
     "pattern*":{
