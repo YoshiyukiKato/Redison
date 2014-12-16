@@ -1,3 +1,3 @@
-var Redison = reqire("./lib/redison");
+var Redison = require("./lib/redison");
 
 module.exports = Redison;

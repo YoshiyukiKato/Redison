@@ -1,6 +1,6 @@
 {
   "name": "redison",
-  "version": "0.0.5",
+  "version": "0.0.8",
   "description": "Redis subscribe event mapper",
   "main": "index.js",
   "scripts": {
@@ -10,5 +10,9 @@
   "license": "MIT",
   "dependencies": {
     "redis": "^0.12.1"
+  },
+  "repository":{
+  	"type":"git",
+	"url":"https://github.com/YoshiyukiKato/Redison.git"
   }
 }

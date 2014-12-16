@@ -138,7 +138,7 @@ The ```psubMap``` is written as follows:
 
 ```js
 var psubMap = {
-    //channels pattern
+    //patterns
     "pattern*":{
         //event:callback
         subscribe:function(channel,count){
