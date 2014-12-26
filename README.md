@@ -1,4 +1,6 @@
 #About
+[![npm version](https://badge.fury.io/js/redison.svg)](http://badge.fury.io/js/redison)
+
 Redis subscribe event mapper
 
 #Dependencies

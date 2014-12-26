@@ -1,6 +1,6 @@
 {
   "name": "redison",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Redis subscribe event mapper",
   "main": "index.js",
   "scripts": {
